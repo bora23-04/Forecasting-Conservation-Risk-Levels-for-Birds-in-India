@@ -131,9 +131,16 @@
 - Random Forest → ~95% accuracy (better/stabler).
 <img width="434" height="224" alt="image" src="https://github.com/user-attachments/assets/610384e3-1ddd-4863-a1c3-b011c0590583" />
 
+
+##### Prediction
+<img width="639" height="558" alt="image" src="https://github.com/user-attachments/assets/d7f8d544-1bc6-4d10-8aa5-b8d87d475da2" />
+
+
 ##### Interpretation:
 - High accuracies indicate the model captures strong signals from population trends and ecological features.
 - Still validate with confusion matrix per-class metrics to ensure High concern species are not missed.
+
+  
 
 ## Dashboard 
 ###### A Streamlit dashboard was developed for:
