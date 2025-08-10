@@ -18,10 +18,10 @@
 - RandomForest & DecisionTree – For building and evaluating machine learning models to classify bird species into conservation concern levels.
 
 ## Data Cleaning/Preprocessing
-##### 1 **Drop unwanted columns** :Unwanted columns were dropped to focus on relevant features for modeling. The removed columns include:
+##### 1 *Drop unwanted columns:* Unwanted columns were dropped to focus on relevant features for modeling. The removed columns include:
 ##### Serial Number, Common Name (India Checklist), Scientific Name (India Checklist), Common Name (eBird 2018), Order, Family, Distribution Range Size (units of 10,000 sq. km.), Distribution Range Size CI (units of 10,000 sq. km.), Diet Composite, Assessed Primarily Based On, Waterbirds Composite and Raptors Composite.
 
-##### 2 Column Renaming:
+##### 2 *Column Renaming:*
 ##### For consistency and easier handling in the machine learning pipeline, several columns were renamed as follows:
 
 -  `'Common Name (eBird 2019)'` → `bird_name`
@@ -46,48 +46,121 @@
 - `'Habitat Composite'` → `habitat_type`
 -  `'Endemicity Composite'` → `endemicity_type`
 
-##### 3.Duplicate Value: Dataset doesn't contain any duplicate value
+##### 3 *Duplicate Value:* Dataset doesn't contain any duplicate value
 
-##### 4 Missing value handling:
+##### 4 *Missing value handling:*
 - Filled numerical columns with 0.
 - Filled categorical columns with mode of each column.
 
-##### 5 Data Type Conversion
-- Converted the following columns to binary (0/1):
--- analysed_long_term (col 4)
--- analysed_current (col 5)
+##### 5 *Data Type Conversion:*
+###### Converted the following columns to binary (0/1):
+- analysed_long_term
+-  analysed_current
+- waterbirds 
+- raptors
+- scavengers 
+###### Converted the following columns to categorical:
+- group 
+- iucn_status 
+- wlpa_schedule 
+- long_term_status
+- current_status 
+- distribution_status 
+- status_of_conservation_concern
+- migratory_status 
+- diet 
+- waterbirds
+- raptors 
+- scavengers
 
-waterbirds (col 16)
+##### 6 *Data Cleaning & Statewise Mapping:*
+- Standardized bird names in both master dataset and statewise dataset (lowercase, removed extra spaces, replaced hyphens with spaces).
+- Removed unwanted whitespace from column names.
+- Used fuzzy matching (fuzz.token_sort_ratio) to align statewise bird names with the master list, creating a correction dictionary for name mapping.
+- Corrected mismatched names and built statewise unique bird sets.
+- Added binary presence columns for each state in the master dataset (1 = present, 0 = absent).
 
-raptors (col 17)
+## EDA (Exploratory Data Analysis)
+##### Perfomed EDA to visualize the dataset
+- Population Trend Category vs Conservation Concern
+<img width="1403" height="423" alt="image" src="https://github.com/user-attachments/assets/167c26f6-e6f6-4ad5-9ff7-aa67379bf0d7" />
 
-scavengers (col 18)
+###### High conservation concern appears mostly for stable populations and rarely for decreasing populations, which could suggest that "concern" status isn’t solely based on population trend.
 
-Converted the following columns to categorical:
+- IUCN Status vs WLPA Schedule
+<img width="1030" height="634" alt="image" src="https://github.com/user-attachments/assets/323d128a-09b8-4e14-910a-7c351b5c2d1c" />
 
-group (col 1)
+###### Most species regardless of migratory status fall under Least Concern, with Resident species making up the majority in all categories, including the most threatened ones.
 
-iucn_status (col 2)
+- Distribution of long term trends
+<img width="1133" height="474" alt="image" src="https://github.com/user-attachments/assets/0d7b323b-91a4-4248-9653-bd8506e105eb" />
 
-wlpa_schedule (col 3)
+###### Most bird species have stable populations, but declining trends are more common than strong increases, which is a concern for conservation.
 
-long_term_status (col 10)
+- Diet Type Distribution Across Migratory Status
+<img width="985" height="546" alt="image" src="https://github.com/user-attachments/assets/52fd1aec-fafe-4852-ae79-0341c98796c3" />
 
-current_status (col 11)
+###### Regardless of migratory status, Invertebrate feeding is the most common diet type, but Resident species have a much more diverse diet compared to migratory species.
 
-distribution_status (col 12)
 
-status_of_conservation_concern (col 13)
+###### conclusion from EDA : The graphs collectively show that population decline, migratory behavior, specific bird groups (waterbirds, raptors), and certain geographic states are strongly associated with higher conservation concern levels — indicating where proactive conservation action should be prioritized.
 
-migratory_status (col 14)
+## Machine Learning Models
+###### 1. *Dataset Split* 
+- Split into train (60%), validation (20%), and test (20%) sets.
+<img width="572" height="164" alt="image" src="https://github.com/user-attachments/assets/fc434515-36d2-42fd-8b2f-33ab0db5000a" />
 
-diet (col 15)
+###### 2. *Encoding & Scaling* 
+- Target encoded using LabelEncoder (Low, Moderate, High).
+<img width="433" height="122" alt="image" src="https://github.com/user-attachments/assets/5944325e-efe8-4c07-8142-457b6ba1c1e8" />
 
-waterbirds (col 16)
+- Scaled numeric features using MinMaxScaler.
+<img width="505" height="137" alt="image" src="https://github.com/user-attachments/assets/4b6b9053-76f6-4ce5-a655-303434fe9960" />
 
-raptors (col 17)
+- One-hot encoded categorical features (OneHotEncoder, handle_unknown='ignore').
+<img width="751" height="288" alt="image" src="https://github.com/user-attachments/assets/ab5a5dbe-23c5-4f70-962c-ef9361a29918" />
 
-scavengers (col 18)
+###### 3. *Model Training*
+- Decision Tree → ~94% accuracy on validation.
+
+  <img width="420" height="229" alt="image" src="https://github.com/user-attachments/assets/59940a1b-a2fb-4cd7-815e-cc5942169bad" />
+
+
+  <img width="443" height="316" alt="image" src="https://github.com/user-attachments/assets/2dd81e44-cd87-4bd5-af60-54101c0488e6" />
+
+- Random Forest → ~95% accuracy (better/stabler).
+<img width="434" height="224" alt="image" src="https://github.com/user-attachments/assets/610384e3-1ddd-4863-a1c3-b011c0590583" />
+
+###### Interpretation:
+- High accuracies indicate the model captures strong signals from population trends and ecological features.
+- Still validate with confusion matrix per-class metrics to ensure High concern species are not missed.
+
+## Dashboard 
+###### A Streamlit dashboard was developed for:
+- Predicting conservation concern based on user inputs.
+- Exploring interactive visualizations such as IUCN Status split, Migratory Status split, Diet vs Bird Type, and Top Threatened States.
+- Downloading summary tables and CSVs.
+
+
+<img width="1036" height="441" alt="image" src="https://github.com/user-attachments/assets/608913bb-16ca-47d9-913d-f9c6fb9a8bee" />
+
+
+<img width="1869" height="700" alt="image" src="https://github.com/user-attachments/assets/46bb812b-3c00-4371-bf41-40361d681404" />
+
+
+<img width="1269" height="277" alt="image" src="https://github.com/user-attachments/assets/d596a515-48bb-45cc-ab63-d9b5c674ed04" />
+
+
+<img width="823" height="796" alt="image" src="https://github.com/user-attachments/assets/0d58aa98-8fdb-4322-ae0f-e333c9ab9fde" />
+
+
+
+
+###### The dataset contains bird information and bird names categorized state-wise. The Streamlit app code is in birds.py, while the visualization and machine learning logic are in the main file.
+
+
+
+
 
 
   
