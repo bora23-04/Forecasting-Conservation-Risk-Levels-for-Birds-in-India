@@ -21,12 +21,10 @@
 ##### Data Cleaning:Unwanted columns were dropped to focus on relevant features for modeling. The removed columns include:
 ##### Serial Number, Common Name (India Checklist), Scientific Name (India Checklist), Common Name (eBird 2018), Order, Family, Distribution Range Size (units of 10,000 sq. km.), Distribution Range Size CI (units of 10,000 sq. km.), Diet Composite, Assessed Primarily Based On, Waterbirds Composite and Raptors Composite.
 
-You can document that step in your GitHub README like this:
+##### **Column Renaming:**
+##### For consistency and easier handling in the machine learning pipeline, several columns were renamed as follows:
 
-> **Column Renaming:**
-> For consistency and easier handling in the machine learning pipeline, several columns were renamed as follows:
->
-> * `'Common Name (eBird 2019)'` → `bird_name`
+- * `'Common Name (eBird 2019)'` → `bird_name`
 > * `'Group'` → `group`
 > * `'IUCN Status'` → `iucn_status`
 > * `'WLPA Schedule'` → `wlpa_schedule`
