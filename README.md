@@ -106,11 +106,11 @@
 ###### conclusion from EDA : The graphs collectively show that population decline, migratory behavior, specific bird groups (waterbirds, raptors), and certain geographic states are strongly associated with higher conservation concern levels — indicating where proactive conservation action should be prioritized.
 
 ## Machine Learning Models
-###### 1. *Dataset Split* 
+##### 1. *Dataset Split* 
 - Split into train (60%), validation (20%), and test (20%) sets.
 <img width="572" height="164" alt="image" src="https://github.com/user-attachments/assets/fc434515-36d2-42fd-8b2f-33ab0db5000a" />
 
-###### 2. *Encoding & Scaling* 
+##### 2. *Encoding & Scaling* 
 - Target encoded using LabelEncoder (Low, Moderate, High).
 <img width="433" height="122" alt="image" src="https://github.com/user-attachments/assets/5944325e-efe8-4c07-8142-457b6ba1c1e8" />
 
@@ -120,7 +120,7 @@
 - One-hot encoded categorical features (OneHotEncoder, handle_unknown='ignore').
 <img width="751" height="288" alt="image" src="https://github.com/user-attachments/assets/ab5a5dbe-23c5-4f70-962c-ef9361a29918" />
 
-###### 3. *Model Training*
+##### 3. *Model Training*
 - Decision Tree → ~94% accuracy on validation.
 
   <img width="420" height="229" alt="image" src="https://github.com/user-attachments/assets/59940a1b-a2fb-4cd7-815e-cc5942169bad" />
@@ -131,7 +131,7 @@
 - Random Forest → ~95% accuracy (better/stabler).
 <img width="434" height="224" alt="image" src="https://github.com/user-attachments/assets/610384e3-1ddd-4863-a1c3-b011c0590583" />
 
-###### Interpretation:
+##### Interpretation:
 - High accuracies indicate the model captures strong signals from population trends and ecological features.
 - Still validate with confusion matrix per-class metrics to ensure High concern species are not missed.
 
