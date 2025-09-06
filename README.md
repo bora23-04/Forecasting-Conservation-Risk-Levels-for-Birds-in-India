@@ -60,6 +60,7 @@
 
   <img width="789" height="105" alt="image" src="https://github.com/user-attachments/assets/262a5050-fca0-4bcf-b7a8-43ac90148138" />
 
+
 ###### Output : <img width="243" height="209" alt="image" src="https://github.com/user-attachments/assets/d71d9936-bc77-4f89-b80e-81a051c6fe6f" />
 
 <img width="1020" height="89" alt="image" src="https://github.com/user-attachments/assets/d8166e5f-480a-4847-a69f-9992f489e7a1" />
@@ -68,7 +69,8 @@
 
 ##### 6 *Missing value handling:*
 - Filled numerical columns with 0.
-  <img width="350" height="247" alt="image" src="https://github.com/user-attachments/assets/f69a4763-276e-403c-8a51-ced90f9433fe" />
+  
+<img width="350" height="247" alt="image" src="https://github.com/user-attachments/assets/f69a4763-276e-403c-8a51-ced90f9433fe" />
 
 - Filled categorical columns with mode of each column.
 <img width="503" height="204" alt="image" src="https://github.com/user-attachments/assets/3127fb82-8d5e-4684-aff1-eea10dbdde37" />
@@ -96,20 +98,21 @@
 
 ## EDA (Exploratory Data Analysis)
 ##### Perfomed EDA to visualize the dataset
+
 - Top 10 Bird Group
 <img width="846" height="444" alt="image" src="https://github.com/user-attachments/assets/3f749a32-8f31-45e6-ad4f-2c185efd55bc" />
 
 ###### Old World Flycatchers have the highest proportion and Watefowl, Tree-Babblers, Scimitar-Babblers and Allies have the lowest proportion
 
 - Bird Endemicity Type Distribution by Conservation Concern
-  <img width="555" height="295" alt="image" src="https://github.com/user-attachments/assets/74e24f10-658c-4944-8e1a-10a641bd9e96" />
+<img width="555" height="295" alt="image" src="https://github.com/user-attachments/assets/74e24f10-658c-4944-8e1a-10a641bd9e96" />
   
 ###### Over half of the species (52%) fall into the Unknown endemicity category.
 ###### Among known categories, Resident-Non-Endemics are most common.
 ###### Across groups, most species are in Low or Moderate conservation concern, while relatively few are categorized as High concern.
 
 - IUCN Status vs WLPA Schedule
-  <img width="856" height="524" alt="image" src="https://github.com/user-attachments/assets/c48a170e-618e-4f89-b23d-0faca3e11bef" />
+<img width="856" height="524" alt="image" src="https://github.com/user-attachments/assets/c48a170e-618e-4f89-b23d-0faca3e11bef" />
 
 ###### Most species regardless of migratory status fall under Least Concern, with Resident species making up the majority in all categories, including the most threatened ones.
 
@@ -142,20 +145,26 @@
 <img width="751" height="288" alt="image" src="https://github.com/user-attachments/assets/ab5a5dbe-23c5-4f70-962c-ef9361a29918" />
 
 ##### 3. *Model Training*
-- Decision Tree → ~91S% accuracy on validation.
+- Decision Tree → ~91% accuracy on validation.
 
-  <img width="437" height="292" alt="image" src="https://github.com/user-attachments/assets/6ebb7553-72d2-4e2c-9691-32d15868ef2b" />
+<img width="398" height="200" alt="image" src="https://github.com/user-attachments/assets/d2858779-7943-43ba-b23b-13239585ecc6" />
 
+<img width="437" height="292" alt="image" src="https://github.com/user-attachments/assets/6ebb7553-72d2-4e2c-9691-32d15868ef2b" />
 
-  <img width="443" height="316" alt="image" src="https://github.com/user-attachments/assets/2dd81e44-cd87-4bd5-af60-54101c0488e6" />
 
 - Random Forest → ~95% accuracy (better/stabler).
-<img width="434" height="224" alt="image" src="https://github.com/user-attachments/assets/610384e3-1ddd-4863-a1c3-b011c0590583" />
+<img width="416" height="289" alt="image" src="https://github.com/user-attachments/assets/d49ebc6e-7aad-4bf7-93c4-b666d7a39ea1" />
+
+- XGBoost → ~97% accuracy.
+<img width="427" height="291" alt="image" src="https://github.com/user-attachments/assets/821d491c-f351-4470-92a9-34a5706698c4" />
 
 
 ##### Prediction
-<img width="639" height="558" alt="image" src="https://github.com/user-attachments/assets/d7f8d544-1bc6-4d10-8aa5-b8d87d475da2" />
+<img width="565" height="356" alt="image" src="https://github.com/user-attachments/assets/3a9b3e2b-b97f-4643-8503-f1739c4ed8ce" />
 
+<img width="699" height="378" alt="image" src="https://github.com/user-attachments/assets/33859f54-5e58-4704-9735-cd5e752a6286" />
+
+<img width="475" height="33" alt="image" src="https://github.com/user-attachments/assets/786dec5c-3d59-47a4-a183-baa63522c29b" />
 
 ##### Interpretation:
 - High accuracies indicate the model captures strong signals from population trends and ecological features.
@@ -166,21 +175,15 @@
 ## Dashboard 
 ###### A Streamlit dashboard was developed for:
 - Predicting conservation concern based on user inputs.
-- Exploring interactive visualizations such as IUCN Status split, Migratory Status split, Diet vs Bird Type, and Top Threatened States.
+- Exploring interactive visualizations such as IUCN Status distribution, WLPA Schedule Distribution, Migratory Status Distribution, Current Status, Long-term Trend Vs Current Annual Change, Endemic Vs Non-endemic Species etc.
 - Downloading summary tables and CSVs.
 
 
-<img width="1036" height="441" alt="image" src="https://github.com/user-attachments/assets/608913bb-16ca-47d9-913d-f9c6fb9a8bee" />
+<img width="1653" height="766" alt="image" src="https://github.com/user-attachments/assets/57d03f40-c57d-4838-aa1e-d551b0ca4fd6" />
 
+<img width="826" height="853" alt="image" src="https://github.com/user-attachments/assets/e5ac50be-73b0-43ca-9fb5-e643f169598c" />
 
-<img width="1869" height="700" alt="image" src="https://github.com/user-attachments/assets/46bb812b-3c00-4371-bf41-40361d681404" />
-
-
-<img width="1269" height="277" alt="image" src="https://github.com/user-attachments/assets/d596a515-48bb-45cc-ab63-d9b5c674ed04" />
-
-
-<img width="823" height="796" alt="image" src="https://github.com/user-attachments/assets/0d58aa98-8fdb-4322-ae0f-e333c9ab9fde" />
-
+<img width="369" height="791" alt="image" src="https://github.com/user-attachments/assets/0fe65a44-525c-4644-9ffc-044543d81781" />
 
 
 
