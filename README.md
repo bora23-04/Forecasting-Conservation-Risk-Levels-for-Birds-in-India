@@ -15,11 +15,13 @@
 - Seaborn & Matplotlib – For static data visualization and exploratory data analysis (EDA).
 - Plotly – For interactive and dynamic visualizations.
 - Streamlit – To build an interactive dashboard for prediction and data exploration.
-- RandomForest & DecisionTree – For building and evaluating machine learning models to classify bird species into conservation concern levels.
+- RandomForest, DecisionTree and XGBoost – For building and evaluating machine learning models to classify bird species into conservation concern levels.
 
 ## Data Cleaning/Preprocessing
 ##### 1 *Drop unwanted columns:* Unwanted columns were dropped to focus on relevant features for modeling. The removed columns include:
 ##### Serial Number, Common Name (India Checklist), Scientific Name (India Checklist), Common Name (eBird 2018), Order, Family, Distribution Range Size (units of 10,000 sq. km.), Distribution Range Size CI (units of 10,000 sq. km.), Diet Composite, Assessed Primarily Based On, Waterbirds Composite and Raptors Composite.
+
+<img width="614" height="274" alt="image" src="https://github.com/user-attachments/assets/cee22e37-6459-4c70-bc5f-f6619e16c4ad" />
 
 ##### 2 *Column Renaming:*
 ##### For consistency and easier handling in the machine learning pipeline, several columns were renamed as follows:
@@ -46,13 +48,32 @@
 - `'Habitat Composite'` → `habitat_type`
 -  `'Endemicity Composite'` → `endemicity_type`
 
-##### 3 *Duplicate Value:* Dataset doesn't contain any duplicate value
+##### 3. *Sorting Dataset:* we sort the birds_name 
 
-##### 4 *Missing value handling:*
+<img width="507" height="253" alt="image" src="https://github.com/user-attachments/assets/b5a5b10c-ba87-41a7-986f-c4ed47679dfb" />
+
+##### 4. *Cleaning Birds Name:* To ensure consistency across datasets, bird names were cleaned and standardized by:
+- Removing extra spaces
+- Converting all names to lowercase
+- Replacing hyphens with spaces
+- Ensuring consistent formatting across birds_df and birds_name
+
+  <img width="789" height="105" alt="image" src="https://github.com/user-attachments/assets/262a5050-fca0-4bcf-b7a8-43ac90148138" />
+
+###### Output : <img width="243" height="209" alt="image" src="https://github.com/user-attachments/assets/d71d9936-bc77-4f89-b80e-81a051c6fe6f" />
+
+<img width="1020" height="89" alt="image" src="https://github.com/user-attachments/assets/d8166e5f-480a-4847-a69f-9992f489e7a1" />
+
+##### 5 *Duplicate Value:* Dataset doesn't contain any duplicate value
+
+##### 6 *Missing value handling:*
 - Filled numerical columns with 0.
-- Filled categorical columns with mode of each column.
+  <img width="350" height="247" alt="image" src="https://github.com/user-attachments/assets/f69a4763-276e-403c-8a51-ced90f9433fe" />
 
-##### 5 *Data Type Conversion:*
+- Filled categorical columns with mode of each column.
+<img width="503" height="204" alt="image" src="https://github.com/user-attachments/assets/3127fb82-8d5e-4684-aff1-eea10dbdde37" />
+
+##### 7 *Data Type Conversion:*
 ###### Converted the following columns to binary (0/1):
 - analysed_long_term
 -  analysed_current
@@ -73,22 +94,22 @@
 - raptors 
 - scavengers
 
-##### 6 *Data Cleaning & Statewise Mapping:*
-- Standardized bird names in both master dataset and statewise dataset (lowercase, removed extra spaces, replaced hyphens with spaces).
-- Removed unwanted whitespace from column names.
-- Used fuzzy matching (fuzz.token_sort_ratio) to align statewise bird names with the master list, creating a correction dictionary for name mapping.
-- Corrected mismatched names and built statewise unique bird sets.
-- Added binary presence columns for each state in the master dataset (1 = present, 0 = absent).
-
 ## EDA (Exploratory Data Analysis)
 ##### Perfomed EDA to visualize the dataset
-- Population Trend Category vs Conservation Concern
-<img width="1403" height="423" alt="image" src="https://github.com/user-attachments/assets/167c26f6-e6f6-4ad5-9ff7-aa67379bf0d7" />
+- Top 10 Bird Group
+<img width="846" height="444" alt="image" src="https://github.com/user-attachments/assets/3f749a32-8f31-45e6-ad4f-2c185efd55bc" />
 
-###### High conservation concern appears mostly for stable populations and rarely for decreasing populations, which could suggest that "concern" status isn’t solely based on population trend.
+###### Old World Flycatchers have the highest proportion and Watefowl, Tree-Babblers, Scimitar-Babblers and Allies have the lowest proportion
+
+- Bird Endemicity Type Distribution by Conservation Concern
+  <img width="555" height="295" alt="image" src="https://github.com/user-attachments/assets/74e24f10-658c-4944-8e1a-10a641bd9e96" />
+  
+###### Over half of the species (52%) fall into the Unknown endemicity category.
+###### Among known categories, Resident-Non-Endemics are most common.
+###### Across groups, most species are in Low or Moderate conservation concern, while relatively few are categorized as High concern.
 
 - IUCN Status vs WLPA Schedule
-<img width="1030" height="634" alt="image" src="https://github.com/user-attachments/assets/323d128a-09b8-4e14-910a-7c351b5c2d1c" />
+  <img width="856" height="524" alt="image" src="https://github.com/user-attachments/assets/c48a170e-618e-4f89-b23d-0faca3e11bef" />
 
 ###### Most species regardless of migratory status fall under Least Concern, with Resident species making up the majority in all categories, including the most threatened ones.
 
@@ -121,9 +142,9 @@
 <img width="751" height="288" alt="image" src="https://github.com/user-attachments/assets/ab5a5dbe-23c5-4f70-962c-ef9361a29918" />
 
 ##### 3. *Model Training*
-- Decision Tree → ~94% accuracy on validation.
+- Decision Tree → ~91S% accuracy on validation.
 
-  <img width="420" height="229" alt="image" src="https://github.com/user-attachments/assets/59940a1b-a2fb-4cd7-815e-cc5942169bad" />
+  <img width="437" height="292" alt="image" src="https://github.com/user-attachments/assets/6ebb7553-72d2-4e2c-9691-32d15868ef2b" />
 
 
   <img width="443" height="316" alt="image" src="https://github.com/user-attachments/assets/2dd81e44-cd87-4bd5-af60-54101c0488e6" />
