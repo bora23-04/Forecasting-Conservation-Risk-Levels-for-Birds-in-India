@@ -173,6 +173,8 @@
   
 
 ## Dashboard 
+
+##### Dashboard: https://forecasting-conservation-risk-levels-for-birds-in-india-p9vplv.streamlit.app/
 ###### A Streamlit dashboard was developed for:
 - Predicting conservation concern based on user inputs.
 - Exploring interactive visualizations such as IUCN Status distribution, WLPA Schedule Distribution, Migratory Status Distribution, Current Status, Long-term Trend Vs Current Annual Change, Endemic Vs Non-endemic Species etc.
@@ -189,7 +191,6 @@
 
 ###### The dataset contains bird information and bird names categorized state-wise. The Streamlit app code is in birds1.py, while the visualization and machine learning logic are in the main file.
 
-#### Dashboard : https://forecasting-conservation-risk-levels-for-birds-in-india-p9vplv.streamlit.app/ 
 
 
 
